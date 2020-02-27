@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="VehicleDbModelStoreContainer" CdmEntityContainer="VehicleDbEntities">
+    <EntitySetMapping Name="VehicleMakes">
+      <EntityTypeMapping TypeName="VehicleDbModel.VehicleMake">
+        <MappingFragment StoreEntitySet="VehicleMake">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Abrv" ColumnName="Abrv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VehicleModels">
+      <EntityTypeMapping TypeName="VehicleDbModel.VehicleModel">
+        <MappingFragment StoreEntitySet="VehicleModel">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MakeId" ColumnName="MakeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Abrv" ColumnName="Abrv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SpGetVehicles" FunctionName="VehicleDbModel.Store.SpGetVehicles">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="VehicleDbModel.SpGetVehicles_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Abrv" ColumnName="Abrv" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+          <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+          <ScalarProperty Name="ModelAbrv" ColumnName="ModelAbrv" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SpUpdateVehicle" FunctionName="VehicleDbModel.Store.SpUpdateVehicle" />
+    <FunctionImportMapping FunctionImportName="SpDeleteVehicle" FunctionName="VehicleDbModel.Store.SpDeleteVehicle" />
+  </EntityContainerMapping>
+</Mapping>

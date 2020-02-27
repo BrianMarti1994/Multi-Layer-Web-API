@@ -1,0 +1,14 @@
+E:\SampleProjects\Vehicle.WebAPI\Vehicle.Model.Common\bin\Debug\Vehicle.Model.Common.dll
+E:\SampleProjects\Vehicle.WebAPI\Vehicle.Model.Common\bin\Debug\Vehicle.Model.Common.pdb
+E:\SampleProjects\Vehicle.WebAPI\Vehicle.Model.Common\obj\Debug\Vehicle.Model.Common.dll
+E:\SampleProjects\Vehicle.WebAPI\Vehicle.Model.Common\obj\Debug\Vehicle.Model.Common.pdb
+E:\SampleProjects\Vehicle.WebAPI\Vehicle.Model.Common\obj\Debug\Vehicle.Model.Common.csprojResolveAssemblyReference.cache
+E:\FDrive\Vehicle.WebAPI\Vehicle.Model.Common\bin\Debug\Vehicle.Model.Common.dll
+E:\FDrive\Vehicle.WebAPI\Vehicle.Model.Common\bin\Debug\Vehicle.Model.Common.pdb
+E:\FDrive\Vehicle.WebAPI\Vehicle.Model.Common\obj\Debug\Vehicle.Model.Common.dll
+E:\FDrive\Vehicle.WebAPI\Vehicle.Model.Common\obj\Debug\Vehicle.Model.Common.pdb
+E:\Vehicle.WebAPI\Vehicle.Model.Common\bin\Debug\Vehicle.Model.Common.dll
+E:\Vehicle.WebAPI\Vehicle.Model.Common\bin\Debug\Vehicle.Model.Common.pdb
+E:\Vehicle.WebAPI\Vehicle.Model.Common\obj\Debug\Vehicle.Model.Common.csprojResolveAssemblyReference.cache
+E:\Vehicle.WebAPI\Vehicle.Model.Common\obj\Debug\Vehicle.Model.Common.dll
+E:\Vehicle.WebAPI\Vehicle.Model.Common\obj\Debug\Vehicle.Model.Common.pdb
