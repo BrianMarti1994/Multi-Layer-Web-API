@@ -10,6 +10,7 @@ using Vehicle.Common;
 using Vehicle.Model;
 using Vehicle.Model.Common;
 using Vehicle.Service.Common;
+using Vehicle.WebAPI.Models;
 
 namespace Vehicle.WebAPI.Controllers
 {
@@ -27,39 +28,40 @@ namespace Vehicle.WebAPI.Controllers
         [HttpGet]
         public async Task<List<IVehicleModel>> GetAllVehiclesModel(PaginatedInputModel pagingParams)
         {
+            List<IVehicleModel> obj = await Service.GetAllVehiclesModel(pagingParams);
+            return (Mapper.Map<List<IVehicleModel>>(obj));
 
-            return await Service.GetAllVehiclesModel(pagingParams);
-
-
+            
         }
         [Route("AddVehicleModel")]
         [HttpPost]
-        public async Task<HttpResponseMessage> SaveVehiclesModel(VehicleModel ObjVeh)
+        public async Task<HttpResponseMessage> SaveVehiclesModel(VehicleModelRestModel ObjVeh)
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
             bool res = false;
             if (ObjVeh != null)
             {
 
-            ObjVehMod = Mapper.Map<VehicleModel>(ObjVeh);
 
-            res = await Service.SaveVehiclesModel(ObjVehMod);
+                VehicleModel IObjVehMod = Mapper.Map<VehicleModel>(ObjVeh);
 
-            if (res == true)
-            {
-                var showmessage = "Vehicle Saved Successfully.";
+                res = await Service.SaveVehiclesModel(IObjVehMod);
 
-                dict.Add("Message", showmessage);
-                return Request.CreateResponse(HttpStatusCode.OK, dict);
-            }
-            else
-            {
-                var showmessage = "Vehicle Not Saved Please try again.";
+                if (res == true)
+                {
+                    var showmessage = "Vehicle Saved Successfully.";
 
-                dict.Add("Message", showmessage);
-                return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+                    dict.Add("Message", showmessage);
+                    return Request.CreateResponse(HttpStatusCode.OK, dict);
+                }
+                else
+                {
+                    var showmessage = "Vehicle Not Saved Please try again.";
 
-            }
+                    dict.Add("Message", showmessage);
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+
+                }
 
             }
             else
@@ -74,31 +76,31 @@ namespace Vehicle.WebAPI.Controllers
 
         [Route("UpdateVehicleModel")]
         [HttpPost]
-        public async Task<HttpResponseMessage> UpdateVehicleModel(VehicleModel ObjVeh)
+        public async Task<HttpResponseMessage> UpdateVehicleModel(VehicleModelRestModel ObjVeh)
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
             bool res = false;
             if (ObjVeh != null)
             {
 
-          
-            ObjVehMod = Mapper.Map<VehicleModel>(ObjVeh);
 
-            res = await Service.UpdateVehicleModel(ObjVehMod);
+                VehicleModel IObjVehMod = Mapper.Map<VehicleModel>(ObjVeh);
 
-            if (res == true)
-            {
-                var showmessage = "Vehicle Updated Successfully.";
+                res = await Service.UpdateVehicleModel(IObjVehMod);
 
-                dict.Add("Message", showmessage);
-                return Request.CreateResponse(HttpStatusCode.OK, dict);
-            }
-            else
-            {
-                var showmessage = "Vehicle Not Updated Please try again.";
+                if (res == true)
+                {
+                    var showmessage = "Vehicle Updated Successfully.";
 
-                dict.Add("Message", showmessage);
-                return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+                    dict.Add("Message", showmessage);
+                    return Request.CreateResponse(HttpStatusCode.OK, dict);
+                }
+                else
+                {
+                    var showmessage = "Vehicle Not Updated Please try again.";
+
+                    dict.Add("Message", showmessage);
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
 
                 }
             }
@@ -113,32 +115,33 @@ namespace Vehicle.WebAPI.Controllers
 
         [Route("DeleteVehicleModel")]
         [HttpPost]
-        public async Task<HttpResponseMessage> DeleteVehicleModel(VehicleModel ObjVeh)
+        public async Task<HttpResponseMessage> DeleteVehicleModel(VehicleModelRestModel ObjVeh)
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
             bool res = false;
             if (ObjVeh != null)
             {
 
-            ObjVehMod = Mapper.Map<VehicleModel>(ObjVeh);
 
-            res = await Service.DeleteVehicleModel(ObjVehMod);
+                VehicleModel IObjVehMod = Mapper.Map<VehicleModel>(ObjVeh);
 
-            if (res == true)
-            {
-                var showmessage = "Vehicle Deleted Successfully.";
+                res = await Service.DeleteVehicleModel(IObjVehMod);
 
-                dict.Add("Message", showmessage);
-                return Request.CreateResponse(HttpStatusCode.OK, dict);
-            }
-            else
-            {
-                var showmessage = "Vehicle Not Deleted Please try again.";
+                if (res == true)
+                {
+                    var showmessage = "Vehicle Deleted Successfully.";
 
-                dict.Add("Message", showmessage);
-                return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+                    dict.Add("Message", showmessage);
+                    return Request.CreateResponse(HttpStatusCode.OK, dict);
+                }
+                else
+                {
+                    var showmessage = "Vehicle Not Deleted Please try again.";
 
-            }
+                    dict.Add("Message", showmessage);
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+
+                }
             }
             else
             {

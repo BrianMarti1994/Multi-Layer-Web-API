@@ -7,6 +7,7 @@ using Vehicle.WebAPI.Controllers;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Vehicle.Common;
+using Vehicle.WebAPI.Models;
 
 namespace Vehicle.WebAPI.Tests
 {
@@ -31,7 +32,7 @@ namespace Vehicle.WebAPI.Tests
         [TestMethod]
         public void TestAddVehicle()
         {
-            Vehicle.Model.VehicleMake obj = new Vehicle.Model.VehicleMake();
+            VehicleMakeRestModel obj = new VehicleMakeRestModel();
             obj.Id = 1;
             obj.Name = "DemoName";
             obj.Abrv = "DemoAbrv";
@@ -46,7 +47,7 @@ namespace Vehicle.WebAPI.Tests
         [TestMethod]
         public void TestUpdateVehicle()
         {
-            Vehicle.Model.VehicleMake obj = new Vehicle.Model.VehicleMake();
+            VehicleMakeRestModel obj = new VehicleMakeRestModel();
             obj.Id = 1;
             obj.Name = "BMW";
             obj.Abrv = "SSD";
@@ -63,7 +64,7 @@ namespace Vehicle.WebAPI.Tests
         {
 
             VehicleMakeController VehicleController = GetInstance();
-            VehicleMake obj = new VehicleMake();
+            VehicleMakeRestModel obj = new VehicleMakeRestModel();
             obj.Id = 1;
             var result = VehicleController.DeleteVehicleMake(obj) as Task<HttpResponseMessage>;
             Assert.AreEqual(true, true);

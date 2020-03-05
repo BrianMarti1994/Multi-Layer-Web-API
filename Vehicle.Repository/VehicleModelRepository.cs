@@ -31,27 +31,74 @@ namespace Vehicle.Repository
 
                 using (var unitOfWork = new UnitOfWork(new VehicleDbEntities()))
                 {
-
-                    var objd = unitOfWork.VehicleModels.GetAll().ToList();
-                    if (objd != null)
+                    string FilterValue = string.Empty, StortingCol = string.Empty;
+                    IEnumerable<string> disFilterValue = pagingParams.FilterParam.Where(x => !String.IsNullOrEmpty(x.FilterValue)).Select(x => x.FilterValue).Distinct();
+                    foreach (string FilterVal in disFilterValue)
                     {
+                        FilterValue = FilterVal;
+                    }
+                    if (!string.IsNullOrEmpty(FilterValue))
+                    {
+
+                        var objd = unitOfWork.VehicleModels.GetAll().Where(s => s.Name.Contains(FilterValue) || s.Abrv.Contains(FilterValue))
+                            .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
+                             .Take(pagingParams.PageSize)
+                             .ToList();
                         list = Mapper.Map<List<IVehicleModel>>(objd);
 
-                        if (pagingParams != null && pagingParams.FilterParam.Any())
-                        {
-                            list = Filter<IVehicleModel>.FilteredData(pagingParams.FilterParam, list).ToList();
-                        }
-                        if (pagingParams != null && pagingParams.SortingParams.Count() > 0 )
-                        {
-                            list = Sorting<IVehicleModel>.SortData(list, pagingParams.SortingParams).ToList();
-
-                        }
-                        return await Paging<IVehicleModel>.CreateAsync(list, pagingParams.PageNumber, pagingParams.PageSize);
+                        return await Task.FromResult(list);
                     }
-                    else
+                    foreach (var sortingParam in pagingParams.SortingParams.Where(x => !String.IsNullOrEmpty(x.ColumnName)))
                     {
-                        return list;
+                        StortingCol = sortingParam.ColumnName;
                     }
+
+
+                    switch (StortingCol)
+                    {
+
+                        case "Id":
+                            var obId = unitOfWork.VehicleModels.GetAll().OrderByDescending(x => x.Id).Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
+                             .Take(pagingParams.PageSize)
+                             .ToList();
+                            list = Mapper.Map<List<IVehicleModel>>(obId);
+                            break;
+                        case "MakeId":
+                            var obMakeId = unitOfWork.VehicleModels.GetAll()
+                                .OrderByDescending(x => x.MakeId).Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
+                             .Take(pagingParams.PageSize)
+                             .ToList();
+                            list = Mapper.Map<List<IVehicleModel>>(obMakeId);
+                            break;
+                        case "Name":
+                            var obNam = unitOfWork.VehicleModels.GetAll().OrderByDescending(x => x.Name)
+                                .OrderByDescending(x => x.Name)
+                              .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
+                             .Take(pagingParams.PageSize)
+                             .ToList();
+                            list = Mapper.Map<List<IVehicleModel>>(obNam);
+                            break;
+
+                        case "Abrv":
+                            var obAb = unitOfWork.VehicleModels.GetAll().OrderByDescending(x => x.Abrv)
+                                .OrderByDescending(x => x.Abrv)
+                               .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
+                             .Take(pagingParams.PageSize)
+                             .ToList();
+                            list = Mapper.Map<List<IVehicleModel>>(obAb);
+                            break;
+
+                        default:
+                            var objd = unitOfWork.VehicleModels.GetAll().OrderBy(c => c.Name)
+                                .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
+                             .Take(pagingParams.PageSize)
+                             .ToList();
+                            list = Mapper.Map<List<IVehicleModel>>(objd);
+                            break;
+
+                    }
+                    return await Task.FromResult(list);
+
                 }
             }
             catch (Exception ex)
@@ -101,16 +148,16 @@ namespace Vehicle.Repository
             try
             {
 
-           
-            using (var unitOfWork = new UnitOfWork(new VehicleDbEntities()))
-            {
-                var VehicleModels = unitOfWork.VehicleModels.SingleOrDefault(s => s.Id.Equals(ObjVechicle.Id));
-                VehicleModels.Name = ObjVechicle.Name;
-                VehicleModels.Abrv = ObjVechicle.Abrv;
-                
-                if (unitOfWork.Save() == 1)
-                    return await Task.FromResult(true);
-                return await Task.FromResult(false);
+
+                using (var unitOfWork = new UnitOfWork(new VehicleDbEntities()))
+                {
+                    var Obj = unitOfWork.VehicleModels.SingleOrDefault(s => s.Id.Equals(ObjVechicle.Id));
+                    Obj.Name = ObjVechicle.Name;
+                    Obj.Abrv = ObjVechicle.Abrv;
+
+                    if (unitOfWork.Save() == 1)
+                        return await Task.FromResult(true);
+                    return await Task.FromResult(false);
                 }
             }
             catch (Exception ex)

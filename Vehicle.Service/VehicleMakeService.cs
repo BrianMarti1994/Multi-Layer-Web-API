@@ -10,6 +10,7 @@ using Vehicle.Service.Common;
 
 using Vehicle.Model;
 using Vehicle.Common;
+using AutoMapper;
 
 namespace Vehicle.Service
 {
@@ -30,31 +31,27 @@ namespace Vehicle.Service
         {
             return await Repository.GetAllVehiclesMake(pagingParams);
 
-            //return  Mapper.Map<List<IVehicleMake>>(data);
         }
         public async Task<bool> SaveVehiclesMake(IVehicleMake ObjVech)
         {
-         
-            ObjVechicle.Id = ObjVech.Id;
-            ObjVechicle.Name = ObjVech.Name;
-            ObjVechicle.Abrv = ObjVech.Abrv;
-
-            return await Repository.SaveVehiclesMake(ObjVechicle);
+            VehicleMake IObjVehMak = Mapper.Map<VehicleMake>(ObjVech);
+            return await Repository.SaveVehiclesMake(IObjVehMak);
         }
+
+
+
         public async Task<bool> UpdateVehicleMake(IVehicleMake ObjVech)
         {
-            ObjVechicle.Id = ObjVech.Id;
-            ObjVechicle.Name = ObjVech.Name;
-            ObjVechicle.Abrv = ObjVech.Abrv;
+            VehicleMake IObjVehMak = Mapper.Map<VehicleMake>(ObjVech);
 
-            return await Repository.UpdateVehicleMake(ObjVechicle);
+            return await Repository.UpdateVehicleMake(IObjVehMak);
         }
 
         public async Task<bool> DeleteVehicleMake(IVehicleMake ObjVech)
         {
-            ObjVechicle.Id = ObjVech.Id;
-            
-            return await Repository.DeleteVehicleMake(ObjVechicle);
+            VehicleMake IObjVehMak = Mapper.Map<VehicleMake>(ObjVech);
+
+            return await Repository.DeleteVehicleMake(IObjVehMak);
         }
     }
 }

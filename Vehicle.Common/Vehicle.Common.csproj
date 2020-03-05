@@ -71,6 +71,9 @@
     <Reference Include="Vehicle.Repository">
       <HintPath>..\Vehicle.Repository\bin\Debug\Vehicle.Repository.dll</HintPath>
     </Reference>
+    <Reference Include="Vehicle.WebAPI">
+      <HintPath>..\Vehicle.WebAPI\bin\Vehicle.WebAPI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\AutoMapperConfig.cs" />

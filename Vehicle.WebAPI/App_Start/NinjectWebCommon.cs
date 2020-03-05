@@ -84,7 +84,7 @@ namespace Vehicle.WebAPI.App_Start
             kernel.Bind<IVehicleModelRepository>().To<VehicleModelRepository>();
             kernel.Bind<IVehicleMakeService>().To<VehicleMakeService>();
             kernel.Bind<IVehicleModelService>().To<VehicleModelService>();
-            kernel.Bind<IAutoMapperConfig>().To<AutoMapperConfig>();
+            //kernel.Bind<IAutoMapperConfig>().To<AutoMapperConfig>();
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
 
         }        

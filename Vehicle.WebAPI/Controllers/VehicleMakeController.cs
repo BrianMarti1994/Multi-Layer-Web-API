@@ -10,7 +10,7 @@ using Vehicle.Common;
 using Vehicle.Model;
 using Vehicle.Model.Common;
 using Vehicle.Service.Common;
-
+using Vehicle.WebAPI.Models;
 
 namespace Vehicle.WebAPI.Controllers
 {
@@ -27,24 +27,26 @@ namespace Vehicle.WebAPI.Controllers
         [Route("GetVehicleMake")]
         [HttpGet]
         public async Task<List<IVehicleMake>> GetAllVehiclesMake(PaginatedInputModel pagingParams)
-       {
+        {
 
-            return await Service.GetAllVehiclesMake( pagingParams);
-
+            List<IVehicleMake> obj = await Service.GetAllVehiclesMake(pagingParams);
+            return (Mapper.Map<List<IVehicleMake>>(obj));
 
         }
         [Route("AddVehiclesMake")]
         [HttpPost]
-        public async Task<HttpResponseMessage> SaveVehiclesMake(VehicleMake ObjVeh)
+        public async Task<HttpResponseMessage> SaveVehiclesMake(VehicleMakeRestModel ObjVeh)
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
             bool res = false;
 
             if (ObjVeh != null)
             {
-                ObjVehMak = Mapper.Map<VehicleMake>(ObjVeh);
+                VehicleMake IObjVehMak = Mapper.Map<VehicleMake>(ObjVeh);
 
-                res = await Service.SaveVehiclesMake(ObjVehMak);
+              
+
+                res = await Service.SaveVehiclesMake(IObjVehMak);
 
                 if (res == true)
                 {
@@ -73,16 +75,17 @@ namespace Vehicle.WebAPI.Controllers
 
         [Route("UpdateVehicleMake")]
         [HttpPost]
-        public async Task<HttpResponseMessage> UpdateVehicleMake(VehicleMake ObjVeh)
+        public async Task<HttpResponseMessage> UpdateVehicleMake(VehicleMakeRestModel ObjVeh)
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
             bool res = false;
             if (ObjVeh != null)
             {
-                
-                ObjVehMak = Mapper.Map<VehicleMake>(ObjVeh);
 
-                res = await Service.UpdateVehicleMake(ObjVehMak);
+                VehicleMake IObjVehMak = Mapper.Map<VehicleMake>(ObjVeh);
+
+
+                res = await Service.UpdateVehicleMake(IObjVehMak);
 
                 if (res == true)
                 {
@@ -107,37 +110,38 @@ namespace Vehicle.WebAPI.Controllers
                 dict.Add("Message", showmessage);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
             }
-            }
+        }
 
         [Route("DeleteVehicleMake")]
         [HttpPost]
-        public async Task<HttpResponseMessage> DeleteVehicleMake(VehicleMake ObjVeh)
+        public async Task<HttpResponseMessage> DeleteVehicleMake(VehicleMakeRestModel ObjVeh)
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
             bool res = false;
             if (ObjVeh != null)
             {
 
-           
-            ObjVehMak = Mapper.Map<VehicleMake>(ObjVeh);
 
-            res = await Service.DeleteVehicleMake(ObjVehMak);
+                VehicleMake IObjVehMak = Mapper.Map<VehicleMake>(ObjVeh);
 
-            if (res == true)
-            {
-                var showmessage = "Vehicle Deleted Successfully.";
 
-                dict.Add("Message", showmessage);
-                return Request.CreateResponse(HttpStatusCode.OK, dict);
-            }
-            else
-            {
-                var showmessage = "Vehicle Not Deleted Please try again.";
+                res = await Service.DeleteVehicleMake(IObjVehMak);
 
-                dict.Add("Message", showmessage);
-                return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+                if (res == true)
+                {
+                    var showmessage = "Vehicle Deleted Successfully.";
 
-            }
+                    dict.Add("Message", showmessage);
+                    return Request.CreateResponse(HttpStatusCode.OK, dict);
+                }
+                else
+                {
+                    var showmessage = "Vehicle Not Deleted Please try again.";
+
+                    dict.Add("Message", showmessage);
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+
+                }
             }
             else
             {

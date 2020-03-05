@@ -12,3 +12,8 @@ E:\Vehicle.WebAPI\Vehicle.Model.Common\bin\Debug\Vehicle.Model.Common.pdb
 E:\Vehicle.WebAPI\Vehicle.Model.Common\obj\Debug\Vehicle.Model.Common.csprojResolveAssemblyReference.cache
 E:\Vehicle.WebAPI\Vehicle.Model.Common\obj\Debug\Vehicle.Model.Common.dll
 E:\Vehicle.WebAPI\Vehicle.Model.Common\obj\Debug\Vehicle.Model.Common.pdb
+C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Model.Common\bin\Debug\Vehicle.Model.Common.dll
+C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Model.Common\bin\Debug\Vehicle.Model.Common.pdb
+C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Model.Common\obj\Debug\Vehicle.Model.Common.csprojResolveAssemblyReference.cache
+C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Model.Common\obj\Debug\Vehicle.Model.Common.dll
+C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Model.Common\obj\Debug\Vehicle.Model.Common.pdb

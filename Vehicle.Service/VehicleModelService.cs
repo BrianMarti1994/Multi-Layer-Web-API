@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,25 +33,19 @@ namespace Vehicle.Service
 
         public async Task<bool> SaveVehiclesModel(IVehicleModel ObjVechicle)
         {
-            ObjVech.Id = ObjVechicle.Id;
-            ObjVech.MakeId = ObjVechicle.MakeId;
-            ObjVech.Name = ObjVechicle.Name;
-            ObjVech.Abrv = ObjVechicle.Abrv;
-            return await Repository.SaveVehiclesModel(ObjVech);
+            VehicleModel IObjVehMOd = Mapper.Map<VehicleModel>(ObjVechicle);
+            return await Repository.SaveVehiclesModel(IObjVehMOd);
         }
         public async Task<bool> UpdateVehicleModel(IVehicleModel ObjVechicle)
         {
-            ObjVech.Id = ObjVechicle.Id;
-            ObjVech.MakeId = ObjVechicle.MakeId;
-            ObjVech.Name = ObjVechicle.Name;
-            ObjVech.Abrv = ObjVechicle.Abrv;
-            return await Repository.UpdateVehicleModel(ObjVech);
+            VehicleModel IObjVehMOd = Mapper.Map<VehicleModel>(ObjVechicle);
+            return await Repository.UpdateVehicleModel(IObjVehMOd);
         }
 
         public async Task<bool> DeleteVehicleModel(IVehicleModel ObjVechicle)
         {
-            ObjVech.Id = ObjVechicle.Id;
-            return await Repository.DeleteVehicleModel(ObjVech);
+            VehicleModel IObjVehMOd = Mapper.Map<VehicleModel>(ObjVechicle);
+            return await Repository.DeleteVehicleModel(IObjVehMOd);
         }
 
     }
