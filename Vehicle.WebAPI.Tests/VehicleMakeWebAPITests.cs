@@ -18,16 +18,16 @@ namespace Vehicle.WebAPI.Tests
         [TestMethod]
         public void TestGetAllVehicles()
         {
-            VehicleMakeController VehicleController = GetInstance();
+            VehicleMakeController vehicleController = GetInstance();
 
-            var TestVehicles = GetTestVehicles();
-            PaginatedInputModel pagingParams = new PaginatedInputModel();
+            var testVehicles = GetTestVehicles();
+            PaginateRestModel pagingParams = new PaginateRestModel();
             pagingParams.FilterParam = null;
             pagingParams.SortingParams = null;
             pagingParams.PageNumber = 1;
             pagingParams.PageSize = 4;
-            var result = VehicleController.GetAllVehiclesMake(pagingParams) as Task<List<IVehicleMake>>;
-            Assert.AreEqual(TestVehicles.Count, 1);
+            var result = vehicleController.GetAllVehiclesMake(pagingParams) as Task<List<VehicleMakeRestModel>>;
+            Assert.AreEqual(testVehicles.Count, 1);
         }
         [TestMethod]
         public void TestAddVehicle()
@@ -38,9 +38,9 @@ namespace Vehicle.WebAPI.Tests
             obj.Abrv = "DemoAbrv";
 
 
-            VehicleMakeController VehicleController = GetInstance();
+            VehicleMakeController vehicleController = GetInstance();
 
-            var result = VehicleController.SaveVehiclesMake(obj) as Task<HttpResponseMessage>;
+            var result = vehicleController.SaveVehiclesMake(obj) as Task<HttpResponseMessage>;
             Assert.AreEqual(true, true);
         }
 
@@ -53,9 +53,9 @@ namespace Vehicle.WebAPI.Tests
             obj.Abrv = "SSD";
 
 
-            VehicleMakeController VehicleController = GetInstance();
+            VehicleMakeController vehicleController = GetInstance();
 
-            var result = VehicleController.UpdateVehicleMake(obj) as Task<HttpResponseMessage>;
+            var result = vehicleController.UpdateVehicleMake(obj) as Task<HttpResponseMessage>;
             Assert.AreEqual(true, true);
         }
 
@@ -63,20 +63,20 @@ namespace Vehicle.WebAPI.Tests
         public void TestDeleteVehicle()
         {
 
-            VehicleMakeController VehicleController = GetInstance();
+            VehicleMakeController vehicleController = GetInstance();
             VehicleMakeRestModel obj = new VehicleMakeRestModel();
             obj.Id = 1;
-            var result = VehicleController.DeleteVehicleMake(obj) as Task<HttpResponseMessage>;
+            var result = vehicleController.DeleteVehicleMake(obj) as Task<HttpResponseMessage>;
             Assert.AreEqual(true, true);
         }
 
         private List<IVehicleMake> GetTestVehicles()
         {
-            var LstVehicleMake = new List<IVehicleMake>();
-            LstVehicleMake.Add(new VehicleMake { Id = 1, Name = "DemoName", Abrv = "DemoAbrv"});
+            var lstVehicleMake = new List<IVehicleMake>();
+            lstVehicleMake.Add(new VehicleMake { Id = 1, Name = "DemoName", Abrv = "DemoAbrv"});
 
 
-            return LstVehicleMake;
+            return lstVehicleMake;
         }
     }
 }

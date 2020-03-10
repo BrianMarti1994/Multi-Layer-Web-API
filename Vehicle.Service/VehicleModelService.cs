@@ -14,7 +14,7 @@ namespace Vehicle.Service
 {
     public class VehicleModelService : IVehicleModelService
     {
-        VehicleModel ObjVech = new VehicleModel();
+        
         protected IVehicleModelRepository Repository { get; private set; }
         public VehicleModelService(IVehicleModelRepository repository)
         {
@@ -31,21 +31,21 @@ namespace Vehicle.Service
 
         }
 
-        public async Task<bool> SaveVehiclesModel(IVehicleModel ObjVechicle)
+        public async Task<bool> SaveVehiclesModel(IVehicleModel vechicleModelService)
         {
-            VehicleModel IObjVehMOd = Mapper.Map<VehicleModel>(ObjVechicle);
-            return await Repository.SaveVehiclesModel(IObjVehMOd);
+            VehicleModel vehicleModel = Mapper.Map<VehicleModel>(vechicleModelService);
+            return await Repository.SaveVehiclesModel(vehicleModel);
         }
-        public async Task<bool> UpdateVehicleModel(IVehicleModel ObjVechicle)
+        public async Task<bool> UpdateVehicleModel(IVehicleModel vechicleModelService)
         {
-            VehicleModel IObjVehMOd = Mapper.Map<VehicleModel>(ObjVechicle);
-            return await Repository.UpdateVehicleModel(IObjVehMOd);
+            VehicleModel vehicleModel = Mapper.Map<VehicleModel>(vechicleModelService);
+            return await Repository.UpdateVehicleModel(vehicleModel);
         }
 
-        public async Task<bool> DeleteVehicleModel(IVehicleModel ObjVechicle)
+        public async Task<bool> DeleteVehicleModel(IVehicleModel vechicleModelService)
         {
-            VehicleModel IObjVehMOd = Mapper.Map<VehicleModel>(ObjVechicle);
-            return await Repository.DeleteVehicleModel(IObjVehMOd);
+            VehicleModel vehicleModel = Mapper.Map<VehicleModel>(vechicleModelService);
+            return await Repository.DeleteVehicleModel(vehicleModel);
         }
 
     }

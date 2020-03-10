@@ -16,7 +16,7 @@ namespace Vehicle.Service
 {
     public class VehicleMakeService : IVehicleMakeService
     {
-        VehicleMake ObjVechicle = new VehicleMake();
+       
         protected IVehicleMakeRepository Repository { get; private set; }
         public VehicleMakeService(IVehicleMakeRepository repository)
         {
@@ -32,26 +32,26 @@ namespace Vehicle.Service
             return await Repository.GetAllVehiclesMake(pagingParams);
 
         }
-        public async Task<bool> SaveVehiclesMake(IVehicleMake ObjVech)
+        public async Task<bool> SaveVehiclesMake(IVehicleMake vehicleMakeService)
         {
-            VehicleMake IObjVehMak = Mapper.Map<VehicleMake>(ObjVech);
-            return await Repository.SaveVehiclesMake(IObjVehMak);
+            VehicleMake vehicleMake = Mapper.Map<VehicleMake>(vehicleMakeService);
+            return await Repository.SaveVehiclesMake(vehicleMake);
         }
 
 
 
         public async Task<bool> UpdateVehicleMake(IVehicleMake ObjVech)
         {
-            VehicleMake IObjVehMak = Mapper.Map<VehicleMake>(ObjVech);
+            VehicleMake vehicleMake = Mapper.Map<VehicleMake>(ObjVech);
 
-            return await Repository.UpdateVehicleMake(IObjVehMak);
+            return await Repository.UpdateVehicleMake(vehicleMake);
         }
 
-        public async Task<bool> DeleteVehicleMake(IVehicleMake ObjVech)
+        public async Task<bool> DeleteVehicleMake(IVehicleMake vehicleMakeService)
         {
-            VehicleMake IObjVehMak = Mapper.Map<VehicleMake>(ObjVech);
+            VehicleMake vehicleMake = Mapper.Map<VehicleMake>(vehicleMakeService);
 
-            return await Repository.DeleteVehicleMake(IObjVehMak);
+            return await Repository.DeleteVehicleMake(vehicleMake);
         }
     }
 }

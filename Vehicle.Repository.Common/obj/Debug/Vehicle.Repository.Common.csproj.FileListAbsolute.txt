@@ -71,7 +71,6 @@ C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Repository.Com
 C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Repository.Common\bin\Debug\EntityFramework.dll
 C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Repository.Common\bin\Debug\Vehicle.Model.Common.pdb
 C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Repository.Common\bin\Debug\Vehicle.Model.pdb
-C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Repository.Common\bin\Debug\Vehicle.Common.pdb
 C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Repository.Common\bin\Debug\Dapper.Contrib.xml
 C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Repository.Common\bin\Debug\AutoMapper.pdb
 C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Repository.Common\bin\Debug\AutoMapper.xml
@@ -135,3 +134,4 @@ C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Repository.Com
 C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Repository.Common\bin\Debug\System.Web.WebPages.Razor.xml
 C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Repository.Common\bin\Debug\System.Web.WebPages.xml
 C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Repository.Common\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Repository.Common\bin\Debug\Vehicle.Common.pdb

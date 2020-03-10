@@ -24,7 +24,7 @@ namespace Vehicle.Repository.Tests
             dd.ColumnName = "Name";
             dd.FilterValue = "DemoName";
             dd.FilterOption = FilterOptions.Contains;
-            IVehicleMakeRepository VehicleRepository = GetInstance();
+            IVehicleMakeRepository vehicleRepository = GetInstance();
             PaginatedInputModel pagingParams = new PaginatedInputModel();
             pagingParams.FilterParam = null;
             pagingParams.SortingParams = null;
@@ -33,7 +33,7 @@ namespace Vehicle.Repository.Tests
 
        
 
-          var result = VehicleRepository.GetAllVehiclesMake(pagingParams) as Task<List<IVehicleMake>>;
+          var result = vehicleRepository.GetAllVehiclesMake(pagingParams) as Task<List<IVehicleMake>>;
             Assert.AreEqual(TestVehicles.Count, 1);
         }
 
@@ -46,9 +46,9 @@ namespace Vehicle.Repository.Tests
             obj.Abrv = "DemoAbrv";
 
 
-            IVehicleMakeRepository VehicleRepository = GetInstance();
+            IVehicleMakeRepository vehicleRepository = GetInstance();
 
-            var result = VehicleRepository.SaveVehiclesMake(obj) as Task<bool>;
+            var result = vehicleRepository.SaveVehiclesMake(obj) as Task<bool>;
             Assert.AreEqual(true, true);
         }
 
@@ -61,9 +61,9 @@ namespace Vehicle.Repository.Tests
             obj.Abrv = "SSD";
 
 
-            IVehicleMakeRepository VehicleRepository = GetInstance();
+            IVehicleMakeRepository vehicleRepository = GetInstance();
 
-            var result = VehicleRepository.UpdateVehicleMake(obj) as Task<bool>;
+            var result = vehicleRepository.UpdateVehicleMake(obj) as Task<bool>;
             Assert.AreEqual(true, true);
         }
 
@@ -79,11 +79,11 @@ namespace Vehicle.Repository.Tests
 
         public List<IVehicleMake> GetTestVehicles()
         {
-            var LstVehicleMake = new List<IVehicleMake>();
-            LstVehicleMake.Add(new VehicleMake { Id = 1, Name = "DemoName", Abrv = "DemoAbrv" });
+            var lstVehicleMake = new List<IVehicleMake>();
+            lstVehicleMake.Add(new VehicleMake { Id = 1, Name = "DemoName", Abrv = "DemoAbrv" });
 
 
-            return LstVehicleMake;
+            return lstVehicleMake;
         }
 
     }

@@ -17,7 +17,7 @@ namespace Vehicle.WebAPI.Controllers
     [RoutePrefix("api/VehicleMake")]
     public class VehicleMakeController : ApiController
     {
-        VehicleMake ObjVehMak = new VehicleMake();
+
         public VehicleMakeController(IVehicleMakeService service)
         {
             this.Service = service;
@@ -26,128 +26,129 @@ namespace Vehicle.WebAPI.Controllers
 
         [Route("GetVehicleMake")]
         [HttpGet]
-        public async Task<List<IVehicleMake>> GetAllVehiclesMake(PaginatedInputModel pagingParams)
+        public async Task<List<VehicleMakeRestModel>> GetAllVehiclesMake(PaginateRestModel pagingParams)
         {
+            PaginatedInputModel paginatedInput = Mapper.Map<PaginatedInputModel>(pagingParams);
 
-            List<IVehicleMake> obj = await Service.GetAllVehiclesMake(pagingParams);
-            return (Mapper.Map<List<IVehicleMake>>(obj));
+            List<IVehicleMake> vehicleMake = await Service.GetAllVehiclesMake(paginatedInput);
+            return (Mapper.Map<List<VehicleMakeRestModel>>(vehicleMake));
 
         }
         [Route("AddVehiclesMake")]
         [HttpPost]
-        public async Task<HttpResponseMessage> SaveVehiclesMake(VehicleMakeRestModel ObjVeh)
+        public async Task<HttpResponseMessage> SaveVehiclesMake(VehicleMakeRestModel vehicleMakeRestModel)
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
             bool res = false;
 
-            if (ObjVeh != null)
+            if (vehicleMakeRestModel != null)
             {
-                VehicleMake IObjVehMak = Mapper.Map<VehicleMake>(ObjVeh);
+                IVehicleMake vehicleMake = Mapper.Map<IVehicleMake>(vehicleMakeRestModel);
 
               
 
-                res = await Service.SaveVehiclesMake(IObjVehMak);
+                res = await Service.SaveVehiclesMake(vehicleMake);
 
                 if (res == true)
                 {
-                    var showmessage = "Vehicle Saved Successfully.";
+                    var showMessage = "Vehicle Saved Successfully.";
 
-                    dict.Add("Message", showmessage);
+                    dict.Add("Message", showMessage);
                     return Request.CreateResponse(HttpStatusCode.OK, dict);
                 }
                 else
                 {
-                    var showmessage = "Vehicle Not Saved Please try again.";
+                    var showMessage = "Vehicle Not Saved Please try again.";
 
-                    dict.Add("Message", showmessage);
+                    dict.Add("Message", showMessage);
                     return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
 
                 }
             }
             else
             {
-                var showmessage = "No Data Found.";
+                var showMessage = "No Data Found.";
 
-                dict.Add("Message", showmessage);
+                dict.Add("Message", showMessage);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
             }
         }
 
         [Route("UpdateVehicleMake")]
         [HttpPost]
-        public async Task<HttpResponseMessage> UpdateVehicleMake(VehicleMakeRestModel ObjVeh)
+        public async Task<HttpResponseMessage> UpdateVehicleMake(VehicleMakeRestModel vehicleMakeRestModel)
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
             bool res = false;
-            if (ObjVeh != null)
+            if (vehicleMakeRestModel != null)
             {
 
-                VehicleMake IObjVehMak = Mapper.Map<VehicleMake>(ObjVeh);
+                IVehicleMake vehicleMake = Mapper.Map<IVehicleMake>(vehicleMakeRestModel);
 
 
-                res = await Service.UpdateVehicleMake(IObjVehMak);
+                res = await Service.UpdateVehicleMake(vehicleMake);
 
                 if (res == true)
                 {
-                    var showmessage = "Vehicle Updated Successfully.";
+                    var showMessage = "Vehicle Updated Successfully.";
 
-                    dict.Add("Message", showmessage);
+                    dict.Add("Message", showMessage);
                     return Request.CreateResponse(HttpStatusCode.OK, dict);
                 }
                 else
                 {
-                    var showmessage = "Vehicle Not Updated Please try again.";
+                    var showMessage = "Vehicle Not Updated Please try again.";
 
-                    dict.Add("Message", showmessage);
+                    dict.Add("Message", showMessage);
                     return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
 
                 }
             }
             else
             {
-                var showmessage = "No Data Found.";
+                var showMessage = "No Data Found.";
 
-                dict.Add("Message", showmessage);
+                dict.Add("Message", showMessage);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
             }
         }
 
         [Route("DeleteVehicleMake")]
         [HttpPost]
-        public async Task<HttpResponseMessage> DeleteVehicleMake(VehicleMakeRestModel ObjVeh)
+        public async Task<HttpResponseMessage> DeleteVehicleMake(VehicleMakeRestModel vehicleMakeRestModel)
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
             bool res = false;
-            if (ObjVeh != null)
+            if (vehicleMakeRestModel != null)
             {
 
 
-                VehicleMake IObjVehMak = Mapper.Map<VehicleMake>(ObjVeh);
+                IVehicleMake vehicleMake = Mapper.Map<IVehicleMake>(vehicleMakeRestModel);
 
 
-                res = await Service.DeleteVehicleMake(IObjVehMak);
+                res = await Service.DeleteVehicleMake(vehicleMake);
 
                 if (res == true)
                 {
-                    var showmessage = "Vehicle Deleted Successfully.";
+                    var showMessage = "Vehicle Deleted Successfully.";
 
-                    dict.Add("Message", showmessage);
+                    dict.Add("Message", showMessage);
                     return Request.CreateResponse(HttpStatusCode.OK, dict);
                 }
                 else
                 {
-                    var showmessage = "Vehicle Not Deleted Please try again.";
+                    var showMessage = "Vehicle Not Deleted Please try again.";
 
-                    dict.Add("Message", showmessage);
+                    dict.Add("Message", showMessage);
                     return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
 
                 }
             }
             else
             {
-                var showmessage = "No Data Found.";
+                var showMessage = "No Data Found.";
 
-                dict.Add("Message", showmessage);
+                dict.Add("Message", showMessage);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
             }
         }

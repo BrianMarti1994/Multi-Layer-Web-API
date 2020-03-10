@@ -21,7 +21,7 @@ namespace Vehicle.Service.Tests
         public void TestGetAllVehicles()
         {
 
-            IVehicleModelService VehicleService = GetInstance();
+            IVehicleModelService vehicleService = GetInstance();
             PaginatedInputModel pagingParams = new PaginatedInputModel();
             pagingParams.FilterParam = null;
             pagingParams.SortingParams = null;
@@ -29,7 +29,7 @@ namespace Vehicle.Service.Tests
             pagingParams.PageSize = 4;
             var TestVehicles = GetTestVehicles();
             
-            var result = VehicleService.GetAllVehiclesModel(pagingParams) as Task<List<IVehicleModel>>;
+            var result = vehicleService.GetAllVehiclesModel(pagingParams) as Task<List<IVehicleModel>>;
             Assert.AreEqual(TestVehicles.Count, 1);
         }
 
@@ -46,9 +46,9 @@ namespace Vehicle.Service.Tests
             obj.Abrv = "DemoAbrv";
 
 
-            IVehicleModelService VehicleService = GetInstance();
+            IVehicleModelService vehicleService = GetInstance();
 
-            var result = VehicleService.SaveVehiclesModel(obj) as Task<bool>;
+            var result = vehicleService.SaveVehiclesModel(obj) as Task<bool>;
             Assert.AreEqual(true, true);
         }
 
@@ -62,9 +62,9 @@ namespace Vehicle.Service.Tests
             obj.Abrv = "SSD";
 
 
-            IVehicleModelService VehicleService = GetInstance();
+            IVehicleModelService vehicleService = GetInstance();
 
-            var result = VehicleService.UpdateVehicleModel(obj) as Task<bool>;
+            var result = vehicleService.UpdateVehicleModel(obj) as Task<bool>;
             Assert.AreEqual(true, true);
         }
 
@@ -72,19 +72,19 @@ namespace Vehicle.Service.Tests
         public void TestDeleteVehicle()
         {
 
-            IVehicleModelService VehicleService = GetInstance();
+            IVehicleModelService vehicleService = GetInstance();
             IVehicleModel obj = new VehicleModel();
             obj.Id = 1;
-            var result = VehicleService.DeleteVehicleModel(obj) as Task<bool>;
+            var result = vehicleService.DeleteVehicleModel(obj) as Task<bool>;
             Assert.AreEqual(true, true);
         }
 
         private List<IVehicleModel> GetTestVehicles()
         {
-            var LstVehicleModel = new List<IVehicleModel>();
-            LstVehicleModel.Add(new VehicleModel { Id = 1, Name = "DemoName", MakeId = 1, Abrv = "DemoAbrv" });
+            var lstVehicleModel = new List<IVehicleModel>();
+            lstVehicleModel.Add(new VehicleModel { Id = 1, Name = "DemoName", MakeId = 1, Abrv = "DemoAbrv" });
 
-            return LstVehicleModel;
+            return lstVehicleModel;
         }
 
     }

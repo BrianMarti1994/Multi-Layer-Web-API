@@ -14,10 +14,10 @@ namespace Vehicle.Repository.Common
 
         Task<List<IVehicleModel>> GetAllVehiclesModel(PaginatedInputModel pagingParams);
 
-        Task<bool> SaveVehiclesModel(VehicleModel ObjVechicle);
+        Task<bool> SaveVehiclesModel(VehicleModel vehicleModel);
 
-        Task<bool> UpdateVehicleModel(VehicleModel ObjVechicle);
+        Task<bool> UpdateVehicleModel(VehicleModel vehicleModel);
 
-        Task<bool> DeleteVehicleModel(VehicleModel ObjVechicle);
+        Task<bool> DeleteVehicleModel(VehicleModel vehicleModel);
     }
 }

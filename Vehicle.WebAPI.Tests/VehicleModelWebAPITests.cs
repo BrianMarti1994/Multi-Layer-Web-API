@@ -20,15 +20,15 @@ namespace Vehicle.WebAPI.Tests
         [TestMethod]
         public void TestGetAllVehicles()
         {
-            VehicleModelController VehicleController = GetInstance();
-            PaginatedInputModel pagingParams = new PaginatedInputModel();
+            VehicleModelController vehicleController = GetInstance();
+            PaginateRestModel pagingParams = new PaginateRestModel();
             pagingParams.FilterParam = null;
             pagingParams.SortingParams = null;
             pagingParams.PageNumber = 1;
             pagingParams.PageSize = 4;
-            var TestVehicles = GetTestVehicles();
-            var result = VehicleController.GetAllVehiclesModel(pagingParams) as Task<List<IVehicleModel>>;
-            Assert.AreEqual(TestVehicles.Count, 1);
+            var testVehicles = GetTestVehicles();
+            var result = vehicleController.GetAllVehiclesModel(pagingParams) as Task<List<VehicleModelRestModel>>;
+            Assert.AreEqual(testVehicles.Count, 1);
         }
 
       
@@ -43,9 +43,9 @@ namespace Vehicle.WebAPI.Tests
             obj.Abrv = "DemoAbrv";
 
 
-            VehicleModelController VehicleController = GetInstance();
+            VehicleModelController vehicleController = GetInstance();
 
-            var result = VehicleController.SaveVehiclesModel(obj) as Task<HttpResponseMessage>;
+            var result = vehicleController.SaveVehiclesModel(obj) as Task<HttpResponseMessage>;
             Assert.AreEqual(true, true);
         }
 
@@ -69,19 +69,19 @@ namespace Vehicle.WebAPI.Tests
         public void TestDeleteVehicle()
         {
 
-            VehicleModelController VehicleController = GetInstance();
+            VehicleModelController vehicleController = GetInstance();
             VehicleModelRestModel obj = new VehicleModelRestModel();
             obj.Id = 1;
-            var result = VehicleController.DeleteVehicleModel(obj) as Task<HttpResponseMessage>;
+            var result = vehicleController.DeleteVehicleModel(obj) as Task<HttpResponseMessage>;
             Assert.AreEqual(true, true);
         }
         
         private List<IVehicleModel> GetTestVehicles()
         {
-            var LstVehicleModel = new List<IVehicleModel>();
-            LstVehicleModel.Add(new VehicleModel { Id = 1, Name = "DemoName", MakeId = 1, Abrv = "DemoAbrv" });
+            var lstVehicleModel = new List<IVehicleModel>();
+            lstVehicleModel.Add(new VehicleModel { Id = 1, Name = "DemoName", MakeId = 1, Abrv = "DemoAbrv" });
 
-            return LstVehicleModel;
+            return lstVehicleModel;
         }
     }
 }

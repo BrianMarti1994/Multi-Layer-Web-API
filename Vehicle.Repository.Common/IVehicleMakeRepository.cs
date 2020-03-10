@@ -13,10 +13,10 @@ namespace Vehicle.Repository.Common
     {
         Task<List<IVehicleMake>> GetAllVehiclesMake(PaginatedInputModel pagingParams);
 
-        Task<bool> SaveVehiclesMake(VehicleMake ObjVechicle);
+        Task<bool> SaveVehiclesMake(VehicleMake vehicleMake);
 
-        Task<bool> UpdateVehicleMake(VehicleMake ObjVechicle);
+        Task<bool> UpdateVehicleMake(VehicleMake vehicleMake);
 
-        Task<bool> DeleteVehicleMake(VehicleMake ObjVechicle);
+        Task<bool> DeleteVehicleMake(VehicleMake vehicleMake);
     }
 }

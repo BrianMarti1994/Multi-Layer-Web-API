@@ -12,10 +12,10 @@ namespace Vehicle.Service.Common
     {
         Task<List<IVehicleModel>> GetAllVehiclesModel(PaginatedInputModel pagingParams);
 
-        Task<bool> SaveVehiclesModel(IVehicleModel ObjVechicle);
+        Task<bool> SaveVehiclesModel(IVehicleModel vehicleModel);
 
-        Task<bool> UpdateVehicleModel(IVehicleModel ObjVechicle);
+        Task<bool> UpdateVehicleModel(IVehicleModel vehicleModel);
 
-        Task<bool> DeleteVehicleModel(IVehicleModel ObjVechicle);
+        Task<bool> DeleteVehicleModel(IVehicleModel vehicleModel);
     }
 }

@@ -16,7 +16,7 @@ namespace Vehicle.Repository
 {
     public class VehicleMakeRepository : Repository<Model.VehicleMake>, IVehicleMakeRepository
     {
-        Generic objGen = new Generic();
+        Generic generic = new Generic();
         public VehicleMakeRepository(VehicleDbEntities context) : base(context)
         {
         }
@@ -24,71 +24,71 @@ namespace Vehicle.Repository
         public async Task<List<IVehicleMake>> GetAllVehiclesMake(PaginatedInputModel pagingParams)
         {
 
-            List<IVehicleMake> list = new List<IVehicleMake>();
+            List<IVehicleMake> listVehicleMake = new List<IVehicleMake>();
             try
             {
                 using (var unitOfWork = new UnitOfWork(new VehicleDbEntities()))
                 {
-                    string FilterValue = string.Empty, StortingCol = string.Empty;
+                    string filterValue = string.Empty, stortingCol = string.Empty;
                     IEnumerable<string> disFilterValue = pagingParams.FilterParam.Where(x => !String.IsNullOrEmpty(x.FilterValue)).Select(x => x.FilterValue).Distinct();
-                    foreach (string FilterVal in disFilterValue)
+                    foreach (string filterVal in disFilterValue)
                     {
-                        FilterValue = FilterVal;
+                        filterValue = filterVal;
                     }
-                    if (!string.IsNullOrEmpty(FilterValue))
+                    if (!string.IsNullOrEmpty(filterValue))
                     {
                        
-                        var objd = unitOfWork.VehicleMakes.GetAll().Where(s => s.Name.Contains(FilterValue) || s.Abrv.Contains(FilterValue))
+                        var objd = unitOfWork.VehicleMakes.GetAll().Where(s => s.Name.Contains(filterValue) || s.Abrv.Contains(filterValue))
                             .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                        list = Mapper.Map<List<IVehicleMake>>(objd);
+                        listVehicleMake = Mapper.Map<List<IVehicleMake>>(objd);
 
-                        return await Task.FromResult(list);
+                        return await Task.FromResult(listVehicleMake);
                     }
                     foreach (var sortingParam in pagingParams.SortingParams.Where(x => !String.IsNullOrEmpty(x.ColumnName)))
                     {
-                        StortingCol = sortingParam.ColumnName;
+                        stortingCol = sortingParam.ColumnName;
                     }
                     
-                    switch (StortingCol)
+                    switch (stortingCol)
                     {
 
                         case "Id":
-                            var obId = unitOfWork.VehicleMakes.GetAll().OrderByDescending(x => x.Id).Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
+                            var objId = unitOfWork.VehicleMakes.GetAll().OrderByDescending(x => x.Id).Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            list = Mapper.Map<List<IVehicleMake>>(obId);
+                            listVehicleMake = Mapper.Map<List<IVehicleMake>>(objId);
                             break;
 
                         case "Name":
-                            var obNam = unitOfWork.VehicleMakes.GetAll().OrderByDescending(x => x.Name)
+                            var objName = unitOfWork.VehicleMakes.GetAll().OrderByDescending(x => x.Name)
                                 .OrderByDescending(x => x.Name)
                               .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            list = Mapper.Map<List<IVehicleMake>>(obNam);
+                            listVehicleMake = Mapper.Map<List<IVehicleMake>>(objName);
                             break;
 
                         case "Abrv":
-                            var obAb = unitOfWork.VehicleMakes.GetAll().OrderByDescending(x => x.Abrv)
+                            var objAbrv = unitOfWork.VehicleMakes.GetAll().OrderByDescending(x => x.Abrv)
                                 .OrderByDescending(x => x.Abrv)
                                .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            list = Mapper.Map<List<IVehicleMake>>(obAb);
+                            listVehicleMake = Mapper.Map<List<IVehicleMake>>(objAbrv);
                             break;
 
                         default:
-                            var objd = unitOfWork.VehicleMakes.GetAll().OrderBy(c => c.Name)
+                            var objDefault = unitOfWork.VehicleMakes.GetAll().OrderBy(c => c.Name)
                                 .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            list = Mapper.Map<List<IVehicleMake>>(objd);
+                            listVehicleMake = Mapper.Map<List<IVehicleMake>>(objDefault);
                             break;
 
                     }
-                    return await Task.FromResult(list);
+                    return await Task.FromResult(listVehicleMake);
 
 
                 }
@@ -97,14 +97,14 @@ namespace Vehicle.Repository
             {
                 //Logs can be stored into Database or can be Email to developer.
 
-                objGen.ErrorLogging(ex, "GetAllVehiclesMake");
+                generic.ErrorLogging(ex, "GetAllVehiclesMake");
 
-                return list;
+                return listVehicleMake;
             }
         }
 
 
-        public async Task<bool> SaveVehiclesMake(Model.VehicleMake ObjVechicle)
+        public async Task<bool> SaveVehiclesMake(Model.VehicleMake vehicleMake)
         {
             try
             {
@@ -112,7 +112,7 @@ namespace Vehicle.Repository
             using (var unitOfWork = new UnitOfWork(new VehicleDbEntities()))
             {
 
-                unitOfWork.VehicleMakes.Add(new Model.VehicleMake() { Id = objGen.UniqueId(), Name = ObjVechicle.Name, Abrv = ObjVechicle.Abrv });
+                unitOfWork.VehicleMakes.Add(new Model.VehicleMake() { Id = generic.UniqueId(), Name = vehicleMake.Name, Abrv = vehicleMake.Abrv });
               
 
                 if (unitOfWork.Save() == 1)
@@ -130,22 +130,22 @@ namespace Vehicle.Repository
             {
                 //Logs can be stored into Database or can be Email to developer.
 
-                objGen.ErrorLogging(ex, "SaveVehiclesMake");
+                generic.ErrorLogging(ex, "SaveVehiclesMake");
 
                 return false;
             }
         }
 
-        public async Task<bool> UpdateVehicleMake(Model.VehicleMake ObjVechicle)
+        public async Task<bool> UpdateVehicleMake(Model.VehicleMake vehicleMake)
         {
             try
             {
 
                 using (var unitOfWork = new UnitOfWork(new VehicleDbEntities()))
                 {
-                    var Obj = unitOfWork.VehicleMakes.SingleOrDefault(s => s.Id.Equals(ObjVechicle.Id));
-                    Obj.Name = ObjVechicle.Name;
-                    Obj.Abrv = ObjVechicle.Abrv;
+                    var Obj = unitOfWork.VehicleMakes.SingleOrDefault(s => s.Id.Equals(vehicleMake.Id));
+                    Obj.Name = vehicleMake.Name;
+                    Obj.Abrv = vehicleMake.Abrv;
 
                     if (unitOfWork.Save() == 1)
                         return await Task.FromResult(true);
@@ -156,20 +156,20 @@ namespace Vehicle.Repository
             {
                 //Logs can be stored into Database or can be Email to developer.
 
-                objGen.ErrorLogging(ex, "UpdateVehicleMake");
+                generic.ErrorLogging(ex, "UpdateVehicleMake");
 
                 return false;
             }
         }
 
-        public async Task<bool> DeleteVehicleMake(Model.VehicleMake ObjVechicle)
+        public async Task<bool> DeleteVehicleMake(Model.VehicleMake vehicleMake)
         {
             try
             {
                 
             using (var unitOfWork = new UnitOfWork(new VehicleDbEntities()))
             {
-                var VehicleMakes = unitOfWork.VehicleMakes.SingleOrDefault(s => s.Id.Equals(ObjVechicle.Id));
+                var VehicleMakes = unitOfWork.VehicleMakes.SingleOrDefault(s => s.Id.Equals(vehicleMake.Id));
                 unitOfWork.VehicleMakes.Remove(VehicleMakes);
                 if (unitOfWork.Save() == 1)
                     return await Task.FromResult(true);
@@ -180,7 +180,7 @@ namespace Vehicle.Repository
             {
                 //Logs can be stored into Database or can be Email to developer.
 
-                objGen.ErrorLogging(ex, "DeleteVehicleMake");
+                generic.ErrorLogging(ex, "DeleteVehicleMake");
 
                 return false;
             }

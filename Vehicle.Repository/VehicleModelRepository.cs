@@ -15,7 +15,7 @@ namespace Vehicle.Repository
 {
    public class VehicleModelRepository : Repository<Model.VehicleModel>, IVehicleModelRepository
     {
-        Generic objGen = new Generic();
+        Generic generic = new Generic();
 
         public VehicleModelRepository(VehicleDbEntities context) : base(context)
         {
@@ -24,51 +24,51 @@ namespace Vehicle.Repository
 
         public async Task<List<IVehicleModel>> GetAllVehiclesModel(PaginatedInputModel pagingParams)
         {
-            List<IVehicleModel> list = new List<IVehicleModel>();
+            List<IVehicleModel> listVehicleModel = new List<IVehicleModel>();
 
             try
             {
 
                 using (var unitOfWork = new UnitOfWork(new VehicleDbEntities()))
                 {
-                    string FilterValue = string.Empty, StortingCol = string.Empty;
+                    string filterValue = string.Empty, stortingCol = string.Empty;
                     IEnumerable<string> disFilterValue = pagingParams.FilterParam.Where(x => !String.IsNullOrEmpty(x.FilterValue)).Select(x => x.FilterValue).Distinct();
-                    foreach (string FilterVal in disFilterValue)
+                    foreach (string filterVal in disFilterValue)
                     {
-                        FilterValue = FilterVal;
+                        filterValue = filterVal;
                     }
-                    if (!string.IsNullOrEmpty(FilterValue))
+                    if (!string.IsNullOrEmpty(filterValue))
                     {
 
-                        var objd = unitOfWork.VehicleModels.GetAll().Where(s => s.Name.Contains(FilterValue) || s.Abrv.Contains(FilterValue))
+                        var objd = unitOfWork.VehicleModels.GetAll().Where(s => s.Name.Contains(filterValue) || s.Abrv.Contains(filterValue))
                             .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                        list = Mapper.Map<List<IVehicleModel>>(objd);
+                        listVehicleModel = Mapper.Map<List<IVehicleModel>>(objd);
 
-                        return await Task.FromResult(list);
+                        return await Task.FromResult(listVehicleModel);
                     }
                     foreach (var sortingParam in pagingParams.SortingParams.Where(x => !String.IsNullOrEmpty(x.ColumnName)))
                     {
-                        StortingCol = sortingParam.ColumnName;
+                        stortingCol = sortingParam.ColumnName;
                     }
 
 
-                    switch (StortingCol)
+                    switch (stortingCol)
                     {
 
                         case "Id":
                             var obId = unitOfWork.VehicleModels.GetAll().OrderByDescending(x => x.Id).Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            list = Mapper.Map<List<IVehicleModel>>(obId);
+                            listVehicleModel = Mapper.Map<List<IVehicleModel>>(obId);
                             break;
                         case "MakeId":
                             var obMakeId = unitOfWork.VehicleModels.GetAll()
                                 .OrderByDescending(x => x.MakeId).Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            list = Mapper.Map<List<IVehicleModel>>(obMakeId);
+                            listVehicleModel = Mapper.Map<List<IVehicleModel>>(obMakeId);
                             break;
                         case "Name":
                             var obNam = unitOfWork.VehicleModels.GetAll().OrderByDescending(x => x.Name)
@@ -76,7 +76,7 @@ namespace Vehicle.Repository
                               .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            list = Mapper.Map<List<IVehicleModel>>(obNam);
+                            listVehicleModel = Mapper.Map<List<IVehicleModel>>(obNam);
                             break;
 
                         case "Abrv":
@@ -85,7 +85,7 @@ namespace Vehicle.Repository
                                .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            list = Mapper.Map<List<IVehicleModel>>(obAb);
+                            listVehicleModel = Mapper.Map<List<IVehicleModel>>(obAb);
                             break;
 
                         default:
@@ -93,11 +93,11 @@ namespace Vehicle.Repository
                                 .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            list = Mapper.Map<List<IVehicleModel>>(objd);
+                            listVehicleModel = Mapper.Map<List<IVehicleModel>>(objd);
                             break;
 
                     }
-                    return await Task.FromResult(list);
+                    return await Task.FromResult(listVehicleModel);
 
                 }
             }
@@ -105,13 +105,13 @@ namespace Vehicle.Repository
             {
                 //Logs can be stored into Database or can be Email to developer.
 
-                objGen.ErrorLogging(ex, "GetAllVehiclesModel");
+                generic.ErrorLogging(ex, "GetAllVehiclesModel");
 
-                return list;
+                return listVehicleModel;
             }
         }
 
-        public async Task<bool> SaveVehiclesModel(Model.VehicleModel ObjVechicle)
+        public async Task<bool> SaveVehiclesModel(Model.VehicleModel vehicleModel)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace Vehicle.Repository
            
             using (var unitOfWork = new UnitOfWork(new VehicleDbEntities()))
             {
-                unitOfWork.VehicleModels.Add(new Model.VehicleModel() { Id = objGen.UniqueId(), MakeId = ObjVechicle.MakeId, Name = ObjVechicle.Name, Abrv = ObjVechicle.Abrv });
+                unitOfWork.VehicleModels.Add(new Model.VehicleModel() { Id = generic.UniqueId(), MakeId = vehicleModel.MakeId, Name = vehicleModel.Name, Abrv = vehicleModel.Abrv });
 
 
                 if (unitOfWork.Save() == 1)
@@ -137,13 +137,13 @@ namespace Vehicle.Repository
             {
                 //Logs can be stored into Database or can be Email to developer.
 
-                objGen.ErrorLogging(ex, "SaveVehiclesModel");
+                generic.ErrorLogging(ex, "SaveVehiclesModel");
 
                 return false;
             }
         }
 
-        public async Task<bool> UpdateVehicleModel(Model.VehicleModel ObjVechicle)
+        public async Task<bool> UpdateVehicleModel(Model.VehicleModel vehicleModel)
         {
             try
             {
@@ -151,9 +151,9 @@ namespace Vehicle.Repository
 
                 using (var unitOfWork = new UnitOfWork(new VehicleDbEntities()))
                 {
-                    var Obj = unitOfWork.VehicleModels.SingleOrDefault(s => s.Id.Equals(ObjVechicle.Id));
-                    Obj.Name = ObjVechicle.Name;
-                    Obj.Abrv = ObjVechicle.Abrv;
+                    var Obj = unitOfWork.VehicleModels.SingleOrDefault(s => s.Id.Equals(vehicleModel.Id));
+                    Obj.Name = vehicleModel.Name;
+                    Obj.Abrv = vehicleModel.Abrv;
 
                     if (unitOfWork.Save() == 1)
                         return await Task.FromResult(true);
@@ -164,13 +164,13 @@ namespace Vehicle.Repository
             {
                 //Logs can be stored into Database or can be Email to developer.
 
-                objGen.ErrorLogging(ex, "UpdateVehicleModel");
+                generic.ErrorLogging(ex, "UpdateVehicleModel");
 
                 return false;
             }
         }
 
-        public async Task<bool> DeleteVehicleModel(Model.VehicleModel ObjVechicle)
+        public async Task<bool> DeleteVehicleModel(Model.VehicleModel vehicleModel)
         {
             try
             {
@@ -178,7 +178,7 @@ namespace Vehicle.Repository
            
             using (var unitOfWork = new UnitOfWork(new VehicleDbEntities()))
             {
-                var VehicleModels = unitOfWork.VehicleModels.SingleOrDefault(s => s.Id.Equals(ObjVechicle.Id));
+                var VehicleModels = unitOfWork.VehicleModels.SingleOrDefault(s => s.Id.Equals(vehicleModel.Id));
                 unitOfWork.VehicleModels.Remove(VehicleModels);
                 if (unitOfWork.Save() == 1)
                     return await Task.FromResult(true);
@@ -186,10 +186,10 @@ namespace Vehicle.Repository
             }
             }
             catch (Exception ex)
-            { 
+            {
                 //Logs can be stored into Database or can be Email to developer.
 
-                objGen.ErrorLogging(ex, "DeleteVehicleModel");
+                generic.ErrorLogging(ex, "DeleteVehicleModel");
 
                 return false;
             }

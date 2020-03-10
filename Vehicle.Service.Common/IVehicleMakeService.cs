@@ -15,11 +15,11 @@ namespace Vehicle.Service.Common
        
             Task<List<IVehicleMake>> GetAllVehiclesMake(PaginatedInputModel pagingParams);
 
-            Task<bool> SaveVehiclesMake(IVehicleMake ObjVechicle);
+            Task<bool> SaveVehiclesMake(IVehicleMake vehicleMake);
 
-            Task<bool> UpdateVehicleMake(IVehicleMake ObjVechicle);
+            Task<bool> UpdateVehicleMake(IVehicleMake vehicleMake);
 
-            Task<bool> DeleteVehicleMake(IVehicleMake ObjVechicle);
+            Task<bool> DeleteVehicleMake(IVehicleMake vehicleMake);
         
     }
 }
