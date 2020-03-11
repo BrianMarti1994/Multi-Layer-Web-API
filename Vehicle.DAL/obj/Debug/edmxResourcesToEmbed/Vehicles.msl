@@ -20,19 +20,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="SpGetVehicles" FunctionName="VehicleDbModel.Store.SpGetVehicles">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="VehicleDbModel.SpGetVehicles_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Abrv" ColumnName="Abrv" />
-          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
-          <ScalarProperty Name="ModelName" ColumnName="ModelName" />
-          <ScalarProperty Name="ModelAbrv" ColumnName="ModelAbrv" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="SpUpdateVehicle" FunctionName="VehicleDbModel.Store.SpUpdateVehicle" />
-    <FunctionImportMapping FunctionImportName="SpDeleteVehicle" FunctionName="VehicleDbModel.Store.SpDeleteVehicle" />
   </EntityContainerMapping>
 </Mapping>

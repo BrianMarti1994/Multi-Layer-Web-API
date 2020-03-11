@@ -7,6 +7,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Abrv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="VehicleModels" Relationship="VehicleDbModel.FK_VehicleMake_Id" FromRole="VehicleMake" ToRole="VehicleModel" />
   </EntityType>
   <EntityType Name="VehicleModel">
     <Key>
@@ -16,6 +17,7 @@
     <Property Name="MakeId" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Abrv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="VehicleMake" Relationship="VehicleDbModel.FK_VehicleMake_Id" FromRole="VehicleModel" ToRole="VehicleMake" />
   </EntityType>
   <EntityContainer Name="VehicleDbEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="VehicleMakes" EntityType="Self.VehicleMake" />
@@ -32,6 +34,10 @@
     <FunctionImport Name="SpDeleteVehicle">
       <Parameter Name="Id" Mode="In" Type="Int32" />
     </FunctionImport>
+    <AssociationSet Name="FK_VehicleMake_Id" Association="VehicleDbModel.FK_VehicleMake_Id">
+      <End Role="VehicleMake" EntitySet="VehicleMakes" />
+      <End Role="VehicleModel" EntitySet="VehicleModels" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="SpGetVehicles_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -41,4 +47,16 @@
     <Property Type="String" Name="ModelName" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="ModelAbrv" Nullable="true" MaxLength="50" />
   </ComplexType>
+  <Association Name="FK_VehicleMake_Id">
+    <End Type="VehicleDbModel.VehicleMake" Role="VehicleMake" Multiplicity="1" />
+    <End Type="VehicleDbModel.VehicleModel" Role="VehicleModel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleMake">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VehicleModel">
+        <PropertyRef Name="MakeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -7,6 +7,7 @@
       <Diagram DiagramId="3e62e169f74645f6b80074f19179f9b3" Name="Diagram1">
         <EntityTypeShape EntityType="VehicleDbModel.VehicleMake" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="VehicleDbModel.VehicleModel" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="VehicleDbModel.FK_VehicleMake_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vehicle.Model.Common;
 
 namespace Vehicle.Model.Common
 {
@@ -11,6 +12,6 @@ namespace Vehicle.Model.Common
         int Id { get; set; }
         string Name { get; set; }
         string Abrv { get; set; }
-       
+        ICollection<IVehicleModel> vehicleModels { get; set; }
     }
     }

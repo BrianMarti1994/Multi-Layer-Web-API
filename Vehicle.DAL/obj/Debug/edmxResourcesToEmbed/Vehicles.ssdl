@@ -17,20 +17,24 @@
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
     <Property Name="Abrv" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <Function Name="SpDeleteVehicle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="SpGetVehicles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="SpUpdateVehicle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Id" Type="int" Mode="In" />
-    <Parameter Name="Name" Type="nvarchar" Mode="In" />
-    <Parameter Name="Abrv" Type="nvarchar" Mode="In" />
-    <Parameter Name="MakeId" Type="int" Mode="In" />
-    <Parameter Name="ModelName" Type="nvarchar" Mode="In" />
-    <Parameter Name="ModelAbrv" Type="nvarchar" Mode="In" />
-  </Function>
+  <Association Name="FK_VehicleMake_Id">
+    <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="1" />
+    <End Role="VehicleModel" Type="Self.VehicleModel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleMake">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VehicleModel">
+        <PropertyRef Name="MakeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="VehicleDbModelStoreContainer">
     <EntitySet Name="VehicleMake" EntityType="Self.VehicleMake" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VehicleModel" EntityType="Self.VehicleModel" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_VehicleMake_Id" Association="Self.FK_VehicleMake_Id">
+      <End Role="VehicleMake" EntitySet="VehicleMake" />
+      <End Role="VehicleModel" EntitySet="VehicleModel" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

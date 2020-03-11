@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using Vehicle.DAL;
 using Vehicle.Repository.Common;
 
 namespace Vehicle.Repository
@@ -22,10 +23,15 @@ namespace Vehicle.Repository
             return Context.Set<TEntity>().Find(id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public IEnumerable<VehicleMake> GetAll()
         {
-            
-            return Context.Set<TEntity>().ToList();
+            VehicleDbEntities obj = new VehicleDbEntities();
+             return obj.VehicleMakes
+                          .Include(x => x.VehicleModels)
+                           .ToList();
+
+
+           // return Context.Set<TEntity>().ToList();
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)

@@ -19,6 +19,7 @@ namespace Vehicle.Repository
         Generic generic = new Generic();
         public VehicleMakeRepository(VehicleDbEntities context) : base(context)
         {
+            //
         }
 
         public async Task<List<IVehicleMake>> GetAllVehiclesMake(PaginatedInputModel pagingParams)
@@ -79,7 +80,11 @@ namespace Vehicle.Repository
                             listVehicleMake = Mapper.Map<List<IVehicleMake>>(objAbrv);
                             break;
 
+                            
+
                         default:
+                            
+
                             var objDefault = unitOfWork.VehicleMakes.GetAll().OrderBy(c => c.Name)
                                 .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)

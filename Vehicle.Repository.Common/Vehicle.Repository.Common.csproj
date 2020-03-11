@@ -50,6 +50,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Vehicle.DAL\Vehicle.DAL.csproj">
+      <Project>{A5B79CCF-7326-4A9A-9515-28B4AC757BCF}</Project>
+      <Name>Vehicle.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Vehicle.Model.Common\Vehicle.Model.Common.csproj">
       <Project>{05192FAD-75CB-4C8C-B5B2-DFCD286841E8}</Project>
       <Name>Vehicle.Model.Common</Name>

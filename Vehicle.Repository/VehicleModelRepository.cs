@@ -63,13 +63,13 @@ namespace Vehicle.Repository
                              .ToList();
                             listVehicleModel = Mapper.Map<List<IVehicleModel>>(obId);
                             break;
-                        case "MakeId":
-                            var obMakeId = unitOfWork.VehicleModels.GetAll()
-                                .OrderByDescending(x => x.MakeId).Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
-                             .Take(pagingParams.PageSize)
-                             .ToList();
-                            listVehicleModel = Mapper.Map<List<IVehicleModel>>(obMakeId);
-                            break;
+                        //case "MakeId":
+                        //    var obMakeId = unitOfWork.VehicleModels.GetAll()
+                        //        .OrderByDescending(x => x.).Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
+                        //     .Take(pagingParams.PageSize)
+                        //     .ToList();
+                        //    listVehicleModel = Mapper.Map<List<IVehicleModel>>(obMakeId);
+                        //    break;
                         case "Name":
                             var obNam = unitOfWork.VehicleModels.GetAll().OrderByDescending(x => x.Name)
                                 .OrderByDescending(x => x.Name)
