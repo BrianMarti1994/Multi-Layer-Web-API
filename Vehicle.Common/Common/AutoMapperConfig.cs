@@ -30,6 +30,8 @@ namespace Vehicle.Common.Common
                 AutoMapper.Mapper.CreateMap<VehicleModelRestModel, Vehicle.Model.VehicleModel>().ReverseMap();
                 AutoMapper.Mapper.CreateMap<Vehicle.Model.Common.IVehicleModel, VehicleModelRestModel>().ReverseMap();
 
+                AutoMapper.Mapper.CreateMap<Vehicle.DAL.VehicleMake, Vehicle.Model.Common.IVehicleModel>().ReverseMap();
+
             });
         }
     }
