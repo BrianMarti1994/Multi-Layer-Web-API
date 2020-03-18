@@ -29,9 +29,12 @@ namespace Vehicle.WebAPI.Controllers
         public async Task<List<VehicleModelRestModel>> GetAllVehiclesModel(PaginateRestModel pagingParams)
         {
             PaginatedInputModel paginatedInput = Mapper.Map<PaginatedInputModel>(pagingParams);
+
+
+            List<VehicleModel> vehicleMake = await Service.GetAllVehiclesModel(paginatedInput);
+            return (Mapper.Map<List<VehicleModelRestModel>>(vehicleMake));
+
             
-            List<IVehicleModel> vehicleModel = await Service.GetAllVehiclesModel(paginatedInput);
-            return (Mapper.Map<List<VehicleModelRestModel>>(vehicleModel));
 
             
         }

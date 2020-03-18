@@ -25,9 +25,12 @@ namespace Vehicle.Service
             this.Repository = repository;
         }
 
-        public async Task<List<IVehicleModel>> GetAllVehiclesModel(PaginatedInputModel pagingParams)
+        public async Task<List<VehicleModel>> GetAllVehiclesModel(PaginatedInputModel pagingParams)
         {
-            return await Repository.GetAllVehiclesModel(pagingParams);
+
+
+            var vehicleModel = await Repository.GetAllVehiclesModel(pagingParams);
+            return (Mapper.Map<List<VehicleModel>>(vehicleModel)); ;
 
         }
 

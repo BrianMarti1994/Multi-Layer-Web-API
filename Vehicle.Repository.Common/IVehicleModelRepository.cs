@@ -12,7 +12,7 @@ namespace Vehicle.Repository.Common
    public interface IVehicleModelRepository : IRepository<VehicleModel>
     {
 
-        Task<List<IVehicleModel>> GetAllVehiclesModel(PaginatedInputModel pagingParams);
+        Task<List<VehicleModel>> GetAllVehiclesModel(PaginatedInputModel pagingParams);
 
         Task<bool> SaveVehiclesModel(VehicleModel vehicleModel);
 

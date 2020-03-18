@@ -8,6 +8,7 @@ using Vehicle.Common.Common;
 using Vehicle.DAL;
 using Vehicle.Model.Common;
 
+
 using AutoMapper;
 using Vehicle.Repository.Common;
 using Vehicle.Common;
@@ -22,10 +23,10 @@ namespace Vehicle.Repository
             //
         }
 
-        public async Task<List<IVehicleMake>> GetAllVehiclesMake(PaginatedInputModel pagingParams)
+        public async Task<List<Model.VehicleMake>> GetAllVehiclesMake(PaginatedInputModel pagingParams)
         {
 
-            List<IVehicleMake> listVehicleMake = new List<IVehicleMake>();
+            List<Model.VehicleMake> listVehicleMake = new List<Model.VehicleMake>();
             try
             {
                 using (var unitOfWork = new UnitOfWork(new VehicleDbEntities()))
@@ -38,12 +39,12 @@ namespace Vehicle.Repository
                     }
                     if (!string.IsNullOrEmpty(filterValue))
                     {
-                       
-                        var objd = unitOfWork.VehicleMakes.GetAll().Where(s => s.Name.Contains(filterValue) || s.Abrv.Contains(filterValue))
+
+                        var objd = unitOfWork.VehicleMakes.Include(X => X.VehicleModels).Where(s => s.Name.Contains(filterValue) || s.Abrv.Contains(filterValue))
                             .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                        listVehicleMake = Mapper.Map<List<IVehicleMake>>(objd);
+                        listVehicleMake = Mapper.Map<List<Model.VehicleMake>>(objd);
 
                         return await Task.FromResult(listVehicleMake);
                     }
@@ -56,40 +57,41 @@ namespace Vehicle.Repository
                     {
 
                         case "Id":
-                            var objId = unitOfWork.VehicleMakes.GetAll().OrderByDescending(x => x.Id).Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
+                            var objId = unitOfWork.VehicleMakes.Include(X => X.VehicleModels).OrderByDescending(x => x.Id).Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            listVehicleMake = Mapper.Map<List<IVehicleMake>>(objId);
+                            listVehicleMake = Mapper.Map<List<Model.VehicleMake>>(objId);
                             break;
 
                         case "Name":
-                            var objName = unitOfWork.VehicleMakes.GetAll().OrderByDescending(x => x.Name)
+                            var objName = unitOfWork.VehicleMakes.Include(X => X.VehicleModels).OrderByDescending(x => x.Name)
                                 .OrderByDescending(x => x.Name)
                               .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            listVehicleMake = Mapper.Map<List<IVehicleMake>>(objName);
+                            listVehicleMake = Mapper.Map<List<Model.VehicleMake>>(objName);
                             break;
 
                         case "Abrv":
-                            var objAbrv = unitOfWork.VehicleMakes.GetAll().OrderByDescending(x => x.Abrv)
+                            var objAbrv = unitOfWork.VehicleMakes.Include(X => X.VehicleModels).OrderByDescending(x => x.Abrv)
                                 .OrderByDescending(x => x.Abrv)
                                .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            listVehicleMake = Mapper.Map<List<IVehicleMake>>(objAbrv);
+                            listVehicleMake = Mapper.Map<List<Model.VehicleMake>>(objAbrv);
                             break;
 
-                            
+
 
                         default:
                             
 
-                            var objDefault = unitOfWork.VehicleMakes.GetAll().OrderBy(c => c.Name)
+                            var objDefault = unitOfWork.VehicleMakes.Include(X => X.VehicleModels)
+                                .OrderBy(c => c.Name)
                                 .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            listVehicleMake = Mapper.Map<List<IVehicleMake>>(objDefault);
+                            listVehicleMake = Mapper.Map<List<Model.VehicleMake>>(objDefault);
                             break;
 
                     }
@@ -104,7 +106,7 @@ namespace Vehicle.Repository
 
                 generic.ErrorLogging(ex, "GetAllVehiclesMake");
 
-                return listVehicleMake;
+                return  listVehicleMake;
             }
         }
 
@@ -174,8 +176,9 @@ namespace Vehicle.Repository
                 
             using (var unitOfWork = new UnitOfWork(new VehicleDbEntities()))
             {
-                var VehicleMakes = unitOfWork.VehicleMakes.SingleOrDefault(s => s.Id.Equals(vehicleMake.Id));
-                unitOfWork.VehicleMakes.Remove(VehicleMakes);
+                    
+                    var VehicleMakes = unitOfWork.VehicleMakes.Include(X => X.VehicleModels).Single(X => X.Id == vehicleMake.Id);
+                    unitOfWork.VehicleMakes.Remove(VehicleMakes);
                 if (unitOfWork.Save() == 1)
                     return await Task.FromResult(true);
                 return await Task.FromResult(false);

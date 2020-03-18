@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vehicle.Model;
 using Vehicle.WebAPI.Models;
 
 namespace Vehicle.Common.Common
@@ -14,14 +15,22 @@ namespace Vehicle.Common.Common
         {
             AutoMapper.Mapper.Initialize(config => {
                 AutoMapper.Mapper.CreateMap<Vehicle.DAL.VehicleMake, Vehicle.Model.VehicleMake>().ReverseMap();
+
                 AutoMapper.Mapper.CreateMap<Vehicle.DAL.VehicleMake, Vehicle.Model.Common.IVehicleMake>().ReverseMap();
+
                 AutoMapper.Mapper.CreateMap<Vehicle.Model.Common.IVehicleMake, Vehicle.Model.VehicleMake>().ReverseMap();
+
                 AutoMapper.Mapper.CreateMap<VehicleMakeRestModel, Vehicle.Model.VehicleMake>().ReverseMap();
-                AutoMapper.Mapper.CreateMap<Vehicle.Model.Common.IVehicleMake, VehicleMakeRestModel>().ReverseMap();
+                // AutoMapper.Mapper.CreateMap<Vehicle.Model.Common.IVehicleMake, VehicleMakeRestModel>().ReverseMap();
+
+                AutoMapper.Mapper.CreateMap<Vehicle.Model.VehicleMake, VehicleMakeRestModel>().ReverseMap();
                 AutoMapper.Mapper.CreateMap<PaginateRestModel, PaginatedInputModel>().ReverseMap();
                 AutoMapper.Mapper.CreateMap<SortingParams, Vehicle.WebAPI.Models.SortingParams>().ReverseMap();
                 AutoMapper.Mapper.CreateMap<FilterParams, Vehicle.WebAPI.Models.FilterParams>().ReverseMap();
 
+                AutoMapper.Mapper.CreateMap<VehicleMake, Vehicle.Model.VehicleMake>().ReverseMap();
+                AutoMapper.Mapper.CreateMap<VehicleMake, Vehicle.Model.Common.IVehicleMake>().ReverseMap();
+                
 
 
                 AutoMapper.Mapper.CreateMap<Vehicle.DAL.VehicleModel, Vehicle.Model.VehicleModel>().ReverseMap();

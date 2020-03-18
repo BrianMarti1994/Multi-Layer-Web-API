@@ -13,6 +13,6 @@ namespace Vehicle.Model.Common
          int MakeId { get; set; }
          string Name { get; set; }
          string Abrv { get; set; }
-        IVehicleMake vehicleMake { get; set; }
+        //IVehicleMake VehicleMake { get; set; }
     }
 }

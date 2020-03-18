@@ -11,7 +11,7 @@ namespace Vehicle.Repository.Common
 {
     public interface IVehicleMakeRepository : IRepository<VehicleMake>
     {
-        Task<List<IVehicleMake>> GetAllVehiclesMake(PaginatedInputModel pagingParams);
+        Task<List<VehicleMake>> GetAllVehiclesMake(PaginatedInputModel pagingParams);
 
         Task<bool> SaveVehiclesMake(VehicleMake vehicleMake);
 

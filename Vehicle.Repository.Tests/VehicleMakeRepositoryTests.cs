@@ -33,7 +33,7 @@ namespace Vehicle.Repository.Tests
 
        
 
-          var result = vehicleRepository.GetAllVehiclesMake(pagingParams) as Task<List<IVehicleMake>>;
+          //var result = vehicleRepository.GetAllVehiclesMake(pagingParams) as Task<List<IVehicleMake>>;
             Assert.AreEqual(TestVehicles.Count, 1);
         }
 

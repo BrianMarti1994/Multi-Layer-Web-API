@@ -14,23 +14,28 @@ namespace Vehicle.DAL
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+    using System.Reflection;
+    using System.Data.Entity.ModelConfiguration;
+
     public partial class VehicleDbEntities : DbContext
     {
         public VehicleDbEntities()
             : base("name=VehicleDbEntities")
         {
+            //Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
         }
-    
+       
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
            
+
             throw new UnintentionalCodeFirstException();
         }
-    
+
+
         public virtual DbSet<VehicleMake> VehicleMakes { get; set; }
         public virtual DbSet<VehicleModel> VehicleModels { get; set; }
-    
-      
+
     }
 }

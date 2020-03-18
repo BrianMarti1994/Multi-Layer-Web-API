@@ -10,7 +10,7 @@ namespace Vehicle.Service.Common
 {
     public interface IVehicleModelService
     {
-        Task<List<IVehicleModel>> GetAllVehiclesModel(PaginatedInputModel pagingParams);
+        Task<List<VehicleModel>> GetAllVehiclesModel(PaginatedInputModel pagingParams);
 
         Task<bool> SaveVehiclesModel(IVehicleModel vehicleModel);
 

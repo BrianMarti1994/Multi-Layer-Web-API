@@ -25,7 +25,7 @@ namespace Vehicle.Service.Tests
             pagingParams.PageNumber = 1;
             pagingParams.PageSize = 4;
             var TestVehicles = GetTestVehicles();
-            var result = vehicleService.GetAllVehiclesMake(pagingParams) as Task<List<IVehicleMake>>;
+            //var result = vehicleService.GetAllVehiclesMake(pagingParams) as Task<List<IVehicleMake>>;
             Assert.AreEqual(TestVehicles.Count, 1);
         }
 

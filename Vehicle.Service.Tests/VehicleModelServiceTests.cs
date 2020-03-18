@@ -29,7 +29,7 @@ namespace Vehicle.Service.Tests
             pagingParams.PageSize = 4;
             var TestVehicles = GetTestVehicles();
             
-            var result = vehicleService.GetAllVehiclesModel(pagingParams) as Task<List<IVehicleModel>>;
+           // var result = vehicleService.GetAllVehiclesModel(pagingParams) as Task<List<IVehicleModel>>;
             Assert.AreEqual(TestVehicles.Count, 1);
         }
 

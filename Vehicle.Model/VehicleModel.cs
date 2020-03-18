@@ -18,7 +18,7 @@ namespace Vehicle.Model
         public string Name { get; set; }
         public string Abrv { get; set; }
 
-        public virtual IVehicleMake vehicleMake { get; set; }
+        public virtual VehicleMake VehicleMake { get; set; }
 
     }
 }

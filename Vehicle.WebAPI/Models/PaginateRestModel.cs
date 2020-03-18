@@ -21,14 +21,14 @@ namespace Vehicle.WebAPI.Models
 
     public enum SortOrders
     {
-        Asc = 1,
-        Desc = 2
+        Asc,
+        Desc
     }
     
 
 public class SortingParams
 {
-    public SortOrders SortOrder { get; set; } = SortOrders.Asc;
+    public string SortOrder { get; set; }
     public string ColumnName { get; set; }
 }
 

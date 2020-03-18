@@ -22,9 +22,9 @@ namespace Vehicle.Repository
         }
 
 
-        public async Task<List<IVehicleModel>> GetAllVehiclesModel(PaginatedInputModel pagingParams)
+        public async Task<List<Model.VehicleModel>> GetAllVehiclesModel(PaginatedInputModel pagingParams)
         {
-            List<IVehicleModel> listVehicleModel = new List<IVehicleModel>();
+            List<Model.VehicleModel> listVehicleModel = new List<Model.VehicleModel>();
 
             try
             {
@@ -44,7 +44,7 @@ namespace Vehicle.Repository
                             .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                        listVehicleModel = Mapper.Map<List<IVehicleModel>>(objd);
+                        listVehicleModel = Mapper.Map<List<Model.VehicleModel>>(objd);
 
                         return await Task.FromResult(listVehicleModel);
                     }
@@ -61,7 +61,7 @@ namespace Vehicle.Repository
                             var obId = unitOfWork.VehicleModels.GetAll().OrderByDescending(x => x.Id).Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            listVehicleModel = Mapper.Map<List<IVehicleModel>>(obId);
+                            listVehicleModel = Mapper.Map<List<Model.VehicleModel>>(obId);
                             break;
                         //case "MakeId":
                         //    var obMakeId = unitOfWork.VehicleModels.GetAll()
@@ -76,7 +76,7 @@ namespace Vehicle.Repository
                               .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            listVehicleModel = Mapper.Map<List<IVehicleModel>>(obNam);
+                            listVehicleModel = Mapper.Map<List<Model.VehicleModel>>(obNam);
                             break;
 
                         case "Abrv":
@@ -85,7 +85,7 @@ namespace Vehicle.Repository
                                .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            listVehicleModel = Mapper.Map<List<IVehicleModel>>(obAb);
+                            listVehicleModel = Mapper.Map<List<Model.VehicleModel>>(obAb);
                             break;
 
                         default:
@@ -93,7 +93,7 @@ namespace Vehicle.Repository
                                 .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                              .Take(pagingParams.PageSize)
                              .ToList();
-                            listVehicleModel = Mapper.Map<List<IVehicleModel>>(objd);
+                            listVehicleModel = Mapper.Map<List<Model.VehicleModel>>(objd);
                             break;
 
                     }
@@ -178,8 +178,12 @@ namespace Vehicle.Repository
            
             using (var unitOfWork = new UnitOfWork(new VehicleDbEntities()))
             {
-                var VehicleModels = unitOfWork.VehicleModels.SingleOrDefault(s => s.Id.Equals(vehicleModel.Id));
-                unitOfWork.VehicleModels.Remove(VehicleModels);
+                   
+                    var VehicleModels = unitOfWork.VehicleModels.Include(X => X.VehicleMake).Single(X => X.Id == vehicleModel.Id);
+
+                   
+
+                    unitOfWork.VehicleModels.Remove(VehicleModels);
                 if (unitOfWork.Save() == 1)
                     return await Task.FromResult(true);
                 return await Task.FromResult(false);

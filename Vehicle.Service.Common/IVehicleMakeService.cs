@@ -13,7 +13,7 @@ namespace Vehicle.Service.Common
    public interface IVehicleMakeService
     {
        
-            Task<List<IVehicleMake>> GetAllVehiclesMake(PaginatedInputModel pagingParams);
+            Task<List<VehicleMake>> GetAllVehiclesMake(PaginatedInputModel pagingParams);
 
             Task<bool> SaveVehiclesMake(IVehicleMake vehicleMake);
 

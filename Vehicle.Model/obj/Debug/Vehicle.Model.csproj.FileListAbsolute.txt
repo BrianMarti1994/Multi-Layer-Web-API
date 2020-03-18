@@ -42,3 +42,14 @@ C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Model\bin\Debu
 C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Model\obj\Debug\Vehicle.Model.csprojResolveAssemblyReference.cache
 C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Model\obj\Debug\Vehicle.Model.dll
 C:\Users\Brian\source\repos\MultiLayered-VehicleWebAPI_v1\Vehicle.Model\obj\Debug\Vehicle.Model.pdb
+C:\Users\Brian\Downloads\MultiLayeredAPI\MultiLayered-VehicleWebAPI_v1-master\Vehicle.Model\bin\Debug\Vehicle.Model.dll
+C:\Users\Brian\Downloads\MultiLayeredAPI\MultiLayered-VehicleWebAPI_v1-master\Vehicle.Model\bin\Debug\Vehicle.Model.pdb
+C:\Users\Brian\Downloads\MultiLayeredAPI\MultiLayered-VehicleWebAPI_v1-master\Vehicle.Model\bin\Debug\Dapper.Contrib.dll
+C:\Users\Brian\Downloads\MultiLayeredAPI\MultiLayered-VehicleWebAPI_v1-master\Vehicle.Model\bin\Debug\Dapper.dll
+C:\Users\Brian\Downloads\MultiLayeredAPI\MultiLayered-VehicleWebAPI_v1-master\Vehicle.Model\bin\Debug\Vehicle.Model.Common.dll
+C:\Users\Brian\Downloads\MultiLayeredAPI\MultiLayered-VehicleWebAPI_v1-master\Vehicle.Model\bin\Debug\Vehicle.Model.Common.pdb
+C:\Users\Brian\Downloads\MultiLayeredAPI\MultiLayered-VehicleWebAPI_v1-master\Vehicle.Model\bin\Debug\Dapper.xml
+C:\Users\Brian\Downloads\MultiLayeredAPI\MultiLayered-VehicleWebAPI_v1-master\Vehicle.Model\bin\Debug\Dapper.Contrib.xml
+C:\Users\Brian\Downloads\MultiLayeredAPI\MultiLayered-VehicleWebAPI_v1-master\Vehicle.Model\obj\Debug\Vehicle.Model.csprojResolveAssemblyReference.cache
+C:\Users\Brian\Downloads\MultiLayeredAPI\MultiLayered-VehicleWebAPI_v1-master\Vehicle.Model\obj\Debug\Vehicle.Model.dll
+C:\Users\Brian\Downloads\MultiLayeredAPI\MultiLayered-VehicleWebAPI_v1-master\Vehicle.Model\obj\Debug\Vehicle.Model.pdb

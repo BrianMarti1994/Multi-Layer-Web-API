@@ -27,9 +27,11 @@ namespace Vehicle.Service
             this.Repository = repository;
         }
 
-        public async Task<List<IVehicleMake>> GetAllVehiclesMake(PaginatedInputModel pagingParams)
+        public async Task<List<VehicleMake>> GetAllVehiclesMake(PaginatedInputModel pagingParams)
         {
-            return await Repository.GetAllVehiclesMake(pagingParams);
+            var vehicleMake = await Repository.GetAllVehiclesMake(pagingParams);
+
+            return (Mapper.Map<List<VehicleMake>>(vehicleMake));
 
         }
         public async Task<bool> SaveVehiclesMake(IVehicleMake vehicleMakeService)

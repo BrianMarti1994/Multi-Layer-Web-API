@@ -26,7 +26,7 @@ namespace Vehicle.Repository.Tests
             pagingParams.PageNumber = 1;
             pagingParams.PageSize = 4;
             var TestVehicles = GetTestVehicles();
-            var result = VehicleRepository.GetAllVehiclesModel(pagingParams) as Task<List<IVehicleModel>>;
+          //  var result = VehicleRepository.GetAllVehiclesModel(pagingParams) as Task<List<IVehicleModel>>;
             Assert.AreEqual(TestVehicles.Count, 1);
         }
 

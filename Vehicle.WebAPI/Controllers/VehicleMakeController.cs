@@ -24,13 +24,14 @@ namespace Vehicle.WebAPI.Controllers
         }
         public IVehicleMakeService Service { get; private set; }
 
+        [BindJson(typeof(PaginateRestModel), "pagingParams")]
         [Route("GetVehicleMake")]
         [HttpGet]
         public async Task<List<VehicleMakeRestModel>> GetAllVehiclesMake(PaginateRestModel pagingParams)
         {
             PaginatedInputModel paginatedInput = Mapper.Map<PaginatedInputModel>(pagingParams);
 
-            List<IVehicleMake> vehicleMake = await Service.GetAllVehiclesMake(paginatedInput);
+            List<VehicleMake> vehicleMake = await Service.GetAllVehiclesMake(paginatedInput);
             return (Mapper.Map<List<VehicleMakeRestModel>>(vehicleMake));
 
         }

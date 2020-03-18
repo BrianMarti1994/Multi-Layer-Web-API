@@ -12,6 +12,7 @@ namespace Vehicle.Model.Common
         int Id { get; set; }
         string Name { get; set; }
         string Abrv { get; set; }
-        ICollection<IVehicleModel> vehicleModels { get; set; }
+
+       // ICollection<IVehicleModel> VehicleModels { get; set; }
     }
     }
