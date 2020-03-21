@@ -9,6 +9,4 @@
 ### Interface Segregation Principle (ISP)
 ### Dependency Inversion Principle (DIP)
 
-=========================================
-## Sample Vehicle Related Application
-### Has two Models which is VehicleMake and VehicleModels (One to Many)
+
